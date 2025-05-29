@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calc html</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <input type="text" id="num1" value="">
+  <input type="text" id="num2" value="">
+  <button id="btn">계산</button>
+  <div id="result"></div>
+  <script>
+    //let btn = $('#btn');
+    let result = $('#result');
+    
+    $('#btn').on("click", () =>{
+      let num1 = Number($('#num1').val());
+      let num2 = Number($('#num2').val());
+      $('#result').html(num1 + num2)
+    })
+    
+  </script>
+</body>
+</html>

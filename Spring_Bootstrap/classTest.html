@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>classTest.html</title>
+</head>
+<style>
+  .active{
+    color: red;
+    font-size: 2rem;
+  }
+</style>
+<body>
+  <div id="box">
+    <div class="active">사과</div>
+    <div class="">바나나</div>
+    <div class="">키위</div>
+  </div>
+  <script>
+    document.querySelectorAll("div").forEach(f => {
+      console.log(f.innerHTML);
+    })
+  </script>
+</body>
+</html>
