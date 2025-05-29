@@ -12,15 +12,29 @@
   }
 </style>
 <body>
-  <div id="box">
-    <div class="active">사과</div>
-    <div class="">바나나</div>
-    <div class="">키위</div>
-  </div>
-  <script>
-    document.querySelectorAll("div").forEach(f => {
-      console.log(f.innerHTML);
+  <div class="active">사과</div>
+  <div class="active">바나나</div>
+  <div class="">키위</div>
+  <button type="button" id="btnCheck">확인</button>
+<script>
+  document.querySelectorAll("div").forEach(f => {
+
+    // 클릭 이벤트 클릭한 div에 active 클래스 토글
+    f.addEventListener("click", () => {
+      f.classList.toggle("active");
     })
-  </script>
+  })
+
+    // 버튼 클릭 핸들러
+    // active 클래스만 가진 div의 내용을 출력
+    let btn = document.getElementById('btnCheck');
+    btn.addEventListener('click', () => {
+      document.querySelectorAll(".active").forEach(f => {
+        console.log(f.innerHTML);
+
+      })
+    })
+
+</script>
 </body>
 </html>
