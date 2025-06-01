@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블 추가와 삭제</title>
+</head>
+<body>
+    이름<input type="text" id="txtName"><br>
+    성적<input type="text" id="txtGrade">
+    <button onclick="addGrade()" id="btnAdd">추가</button>
+
+    <table border="1">
+        <thead>
+            <th>이름</th>
+            <th>성적</th>
+            <th></th>
+        </thead>
+        <tbody id="tdGrade">
+            <tr>
+                <td>김민지</td>
+                <td>100</td>
+                <td><button onclick="deleteRow(this)">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+<script>
+    function addGrade(){
+        let tName = document.getElementById('txtName').value;
+        let tGrade = document.getElementById('txtGrade').value;
+
+        tdGrade.insertAdjacentHTML("beforeend", `<td>${tName}</td>
+                                                <td>${tGrade}</td>
+                                                <td><button onclick="deleteRow(this)">X</button></td>`);
+
+        document.getElementById('txtName').value = '';
+        document.getElementById('txtGrade').value = '';
+
+    }
+
+    function deleteRow(button){
+        let row = button.parentNode.parentNode;
+        row.remove();
+    }
+</script>
+</html>
