@@ -21,6 +21,48 @@
     <div id="result"></div>
 </body>
 <script>
+    let txtArr = [];
+    window.onload = function(){
+        btnAdd.addEventListener("click", funcAdd)
+        btnDelete.addEventListener("click", funcDel)
+        btnSearch.addEventListener("click", funcSer)
+        txtFruit.addEventListener("focus", function(){this.select();})
+    }
+    function funcAdd(){
+        let txtAdd = document.querySelector('input[type="text"]').value;
+        txtArr.push(txtAdd);
+
+        let txtrst = document.getElementById('result');
+        txtrst.innerHTML += txtAdd + ', ';
+        document.querySelector('input[type="text"]').value = '';
+
+    }
+    function funcDel(){
+        let txtDel = document.querySelector('input[type="text"]').value;
+        let index = txtArr.indexOf(txtDel);
+        if(index > -1){
+
+            txtArr.splice(index, 1);
+            
+            let txtrst = document.getElementById('result');
+            txtrst.innerHTML = txtArr.join(', ');
+            document.querySelector('input[type="text"]').value = '';
+        
+        }
+
+    }
+    function funcSer(){
+        let txtSer = document.querySelector('input[type="text"]').value;
+        let index = txtArr.indexOf(txtSer);
+        let txtrst = document.getElementById('result');
+        if(index > -1){
+
+            txtrst.innerHTML = txtArr.join(', ') + '<br>검색위치 : ' + index;
+            document.querySelector('input[type="text"]').value = '';
+
+        }
+
+    }
 
 </script>
 </html>
