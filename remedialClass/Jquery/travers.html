@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<style>
+  body {
+    text-align: center;
+  }
+</style>
+
+<body>
+  <table border="1">
+    <tbody>
+      <tr data-no="a01" data-name="TV">
+        <td>1</td>
+        <td>2</td>
+        <td><button type="button" class="btn" data-no="a01">조회</button></td>
+      </tr>
+      <tr data-name="KB">
+        <td>3</td>
+        <td>4</td>
+        <td><button type="button" class="btn">조회</button></td>
+      </tr>
+      <tr data-name="JW">
+        <td>5</td>
+        <td>6</td>
+        <td><button type="button" class="btn">조회</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    // 그룹이벤트
+    $("table").on("click", "button", () => {
+      console.log(event.target.closest("tr").data("name"));
+    })
+
+    document.querySelector("table").addEventListener("click", function () {
+      //event.target.tagName == "BUTTON"
+      if (event.target.classList.contains("btn")) {
+        let result = event.target.closest("tr").dataset.name
+        console.log(result);
+      }
+    })
+
+    document.querySelectorAll('td:nth-child(2)').forEach(function(ele,idx){
+      ele.style.backgroundColor = "green";
+    })
+
+    $('td:nth-child(2)').css('backgroundColor', 'yellow');
+
+    // $('td:nth-child(2)').css('backgroundColor', 'red');
+    // console.log( $('td:nth-child(2)').css('backgroundColor'));
+
+    // $('td:nth-child(2)').each((idx, ele) => {
+    //   console.log($(ele).html());
+    // })
+  </script>
+</body>
+
+</html>

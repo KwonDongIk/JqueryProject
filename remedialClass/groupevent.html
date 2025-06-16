@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="txt">
+  <button id="btn">추가</button>
+  <div id="box">
+    <div class="fruit">사과<span class="span">X</span></div>
+  </div>
+<script>
+  btn.addEventListener("click", function(){
+    box.insertAdjacentHTML("beforeend", `<div class="fruit">${txt.value}<span class="span">X</span></div>`)
+  })
+
+  document.getElementById('box').addEventListener("click", function(){
+     console.log(event.target);
+    // if(event.target.classList.contains('span')){
+    //   console.log(event.target);
+    //   event.target.parentElement.remove();
+
+    // }
+    if(event.target.tagName="SPAN"){
+      event.target.parentElement.remove();
+    }
+  })
+
+</script>
+</body>
+</html>
