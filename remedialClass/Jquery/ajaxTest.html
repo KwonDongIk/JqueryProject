@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ajaxTest</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<style>
+  li{
+    font-size: 30px;
+    color: red;
+  }
+</style>
+<body>
+  <ul>
+    <li data-id="">title <span>X</span></li>
+  </ul>
+  <script>
+    $.ajax('https://jsonplaceholder.typicode.com/posts')
+     .then( result => {
+      console.log(result);
+      // for(let i = 0; i < result.length; i ++){
+
+      //   $('ul').append(`<li>${result[i].title}</li>`);
+      
+      // }
+
+      result.forEach(element => {
+
+        $('ul').append(`<li data-id="${element.id}">${element.title} <span>X</span></li>`);
+        
+      });
+
+      $("ul").on("click", "span", () => {
+        // ajax
+        const id = $(event.target).parent().data("id");
+        const span = $(event.target)
+        $.ajax('https://jsonplaceholder.typicode.com/posts/'+id,{method : 'delete'})
+        .done(result => {
+          console.log(result);
+          span.parent().remove();
+        }).fail(err => console.log('삭제 실패'));
+      })
+    })
+  </script>
+  
+</body>
+</html>
