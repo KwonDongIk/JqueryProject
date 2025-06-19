@@ -11,38 +11,109 @@
     font-size: 30px;
     color: red;
   }
+
+  li span{
+    display: inline-block;
+  }
+
+  li span:first-child{
+    width: 70%;
+  }
+
+  li span:last-child{
+    width: 20%;
+  }
+
+  li input{
+    width: 90%;
+  }
 </style>
 <body>
   <ul>
-    <li data-id="">title <span>X</span></li>
+    
   </ul>
   <script>
-    $.ajax('https://jsonplaceholder.typicode.com/posts')
-     .then( result => {
-      console.log(result);
-      // for(let i = 0; i < result.length; i ++){
 
-      //   $('ul').append(`<li>${result[i].title}</li>`);
-      
-      // }
+    getData();
+    replaceUpdForm();
+    /*
+    1. 로딩 후 전체조회
+       본인 글 인경우 수정 삭제버튼 추가
+       내용만 조회
+    2. 수정 가능
+       2-1 수정폼 (저장, 취소)
+       2-2 저장
+       2-3 취소
+    3. 삭제 가능
+    */
 
-      result.forEach(element => {
+    // 조회 폼 생성
+    function makePost(data){
+    let tag = `<li data-id="${data.id}">
+                <span>${data.title}</span> 
+                <span><button class="btnUpd">수정</button></span>
+                <span><button class="btnDel">삭제</button></span>
+              </li>`
+    return tag;
+    }
 
-        $('ul').append(`<li data-id="${element.id}">${element.title} <span>X</span></li>`);
-        
-      });
+    // 수정 폼 생성
+    function makeForm(data){
+      let form = `<li data-id="${data.id}">
+                    <span><input value="${data.title}"></span> 
+                    <span><button class="btnSave">저장</button></span>
+                    <span><button class="btnCan">취소</button></span>
+                  </li>`
+      return form;
+    }
 
-      $("ul").on("click", "span", () => {
-        // ajax
-        const id = $(event.target).parent().data("id");
-        const span = $(event.target)
-        $.ajax('https://jsonplaceholder.typicode.com/posts/'+id,{method : 'delete'})
-        .done(result => {
-          console.log(result);
-          span.parent().remove();
-        }).fail(err => console.log('삭제 실패'));
+    // 조회폼을 수정폼으로 변경 이벤트 지정
+    function replaceUpdForm(){
+      $('ul').on('click', '.btnUpd', ()=>{
+
+        // ID 속성
+        let id = $(event.target).closest('li').data('id');
+        let title = $(event.target).closest('li').find('span').html();
+        // 단건조회 ajax
+        $(`[data-id=${id}]`).replaceWith(makeForm({id, title}))
+
       })
+
+      }
+
+    /*-----------------
+    잔체조회
+    ------------------*/
+    function getData(){
+
+      $.ajax('https://jsonplaceholder.typicode.com/posts')
+       .then( result => {
+        console.log(result);
+        // for(let i = 0; i < result.length; i ++){
+  
+        //   $('ul').append(`<li>${result[i].title}</li>`);
+        
+        // }
+  
+        result.forEach(data => {
+          
+          $('ul').append(makePost(data));
+
+        });
     })
+  }
+
+  // $("ul").on("click", "span", () => {
+  //   // ajax
+  //   const id = $(event.target).parent().data("id");
+  //   const span = $(event.target)
+  //   $.ajax('https://jsonplaceholder.typicode.com/posts/'+id,{method : 'delete'})
+  //   .done(result => {
+  //     console.log(result);
+  //     span.parent().remove();
+  //   }).fail(err => console.log('삭제 실패'));
+  // })
+    
   </script>
   
 </body>
